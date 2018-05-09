@@ -8,7 +8,7 @@ import java.util.Stack;
 import javax.swing.SwingUtilities;
 
 import com.freecell.Helper;
-import com.freecell.models.DynamicCardRefined;
+import com.freecell.models.Card;
 import com.freecell.models.FreeCellGame;
 import com.freecell.views.DeckBackPanel;
 import com.freecell.views.FreeSpace;
@@ -109,13 +109,13 @@ public class FreeCellPresenter
 		if(table.getComponentAt(aPoint) instanceof GameColumn)
 		{
 			model.setCardsOriginalColumn(((GameColumn)table.getComponentAt(aPoint)));
-			DynamicCardRefined temp = getCardInColumn(aPoint);
+			Card temp = getCardInColumn(aPoint);
 			GameColumn original = model.getCardsOriginalColumn();
 			int cardIndex = original.indexOf(temp);
 			
 			System.out.println("\nPoint x: " + aPoint.x + " y: " + aPoint.y);
 			System.out.println("index: " + cardIndex);
-			Stack<DynamicCardRefined> cards = original.getColumnCards();
+			Stack<Card> cards = original.getColumnCards();
 			int size = cards.size();
 			
 			//default the click to grab the lowest card
@@ -154,7 +154,7 @@ public class FreeCellPresenter
 			if(fs.getCardPlacedInFreeSpace() != null)
 			{
 				model.setCardOriginalFreeSpace(fs);
-				Stack<DynamicCardRefined> cardsBeingMoved = model.getCardsBeingMoved();
+				Stack<Card> cardsBeingMoved = model.getCardsBeingMoved();
 				cardsBeingMoved.push(fs.getCardPlacedInFreeSpace());
 				fs.remove(fs.getCardPlacedInFreeSpace());
 				fs.setCardPlacedInFreeSpace(null);
@@ -194,20 +194,20 @@ public class FreeCellPresenter
 			helper.returnCards();
 	}
 	
-	public DynamicCardRefined getCardInColumn(Point aPoint)
+	public Card getCardInColumn(Point aPoint)
 	{
 		TablePanel table = view.getTable();
 		GameColumn cardsOriginalColumn = model.getCardsOriginalColumn();
 		Point columnPoint = SwingUtilities.convertPoint(table, aPoint, cardsOriginalColumn);
-		if(cardsOriginalColumn.getComponentAt(columnPoint) instanceof DynamicCardRefined)
-			return (DynamicCardRefined) cardsOriginalColumn.getComponentAt(columnPoint);
+		if(cardsOriginalColumn.getComponentAt(columnPoint) instanceof Card)
+			return (Card) cardsOriginalColumn.getComponentAt(columnPoint);
 		else 
 			return cardsOriginalColumn.peek();
 	}
 	
 	public void handleMouseDragged (MouseEvent e)
 	{	
-		Stack<DynamicCardRefined> cardsBeingMoved = model.getCardsBeingMoved();
+		Stack<Card> cardsBeingMoved = model.getCardsBeingMoved();
 		if(cardsBeingMoved.size() == 0)
 			return;
 		
@@ -218,7 +218,7 @@ public class FreeCellPresenter
 	 
 	public boolean clearScreenOfMovingCards() 
 	{
-		Stack<DynamicCardRefined> cardsBeingMoved = model.getCardsBeingMoved();
+		Stack<Card> cardsBeingMoved = model.getCardsBeingMoved();
 		if(cardsBeingMoved.size() == 0)
 			return false;
 		 
@@ -234,7 +234,7 @@ public class FreeCellPresenter
 	
 	public void freeSpaceMouseReleased(FreeSpace fs)
 	{
-		Stack<DynamicCardRefined> cardsBeingMoved = model.getCardsBeingMoved();
+		Stack<Card> cardsBeingMoved = model.getCardsBeingMoved();
 		if(cardsBeingMoved.size() > 1)
 		{
 			helper.returnToOriginalColumn();
@@ -271,7 +271,7 @@ public class FreeCellPresenter
 	public void resultStackMouseReleased(ResultStack stack)
 	{
 		System.out.println("Adding to result stack:\n");
-		Stack<DynamicCardRefined> cardsBeingMoved = model.getCardsBeingMoved();
+		Stack<Card> cardsBeingMoved = model.getCardsBeingMoved();
 		if(cardsBeingMoved.size() > 1) 
 		{
 			helper.returnToOriginalColumn();
@@ -303,7 +303,7 @@ public class FreeCellPresenter
 			System.out.println("Releasing in game column\n");
 			GameColumn newColumn = (GameColumn) table.getComponentAt(tablePoint);
 			GameColumn cardsOriginalColumn = model.getCardsOriginalColumn();
-			Stack<DynamicCardRefined> cardsBeingMoved= model.getCardsBeingMoved();
+			Stack<Card> cardsBeingMoved= model.getCardsBeingMoved();
 			if(newColumn != cardsOriginalColumn)
 			{
 				if(helper.checkNumMoves(cardsBeingMoved.subList(0, cardsBeingMoved.size()), cardsOriginalColumn, newColumn))

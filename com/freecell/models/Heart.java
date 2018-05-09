@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Heart extends DynamicCardRefined
+public class Heart extends Card
 {
 	//--------------------------------------
 	//-------hearts dynamic locations-------

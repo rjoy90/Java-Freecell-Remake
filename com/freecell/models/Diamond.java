@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Diamond extends DynamicCardRefined
+public class Diamond extends Card
 {
 	//--------------------------------------------------------
 	//--------------Diamonds here-----------------------------

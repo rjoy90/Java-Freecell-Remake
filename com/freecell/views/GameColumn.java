@@ -7,27 +7,27 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Stack;
 import javax.swing.JLayeredPane;
-import com.freecell.models.DynamicCardRefined;
+import com.freecell.models.Card;
 
 public class GameColumn extends JLayeredPane 
 {
 	public static int count;
 	
 	private int number;
-	private Stack<DynamicCardRefined> columnCards;//each gameColumn holds a stack of cards
+	private Stack<Card> columnCards;//each gameColumn holds a stack of cards
 	private final int width, height;
 	public GameColumn()
 	{
 		number = ++count;
 		width = 120;// this is really 80, but +40 for the gaps
 		height = 120;
-		columnCards = new Stack<DynamicCardRefined>();
+		columnCards = new Stack<Card>();
 		super.setOpaque(true);//this will allow the jlayeredpane to be transparent, revealing gamecolumn's true background
 		setBackground(Color.orange);
 		this.setMaximumSize(new Dimension(80, 720));
 	}
 	
-	public void push(DynamicCardRefined thisCard)
+	public void push(Card thisCard)
 	{
 		System.out.println("Adding: " + thisCard + " to column: " + number); 
 		thisCard.setBounds(0, (int) (height/3.0 * columnCards.size()), 80,120);
@@ -37,9 +37,9 @@ public class GameColumn extends JLayeredPane
 		this.repaint();
 	}
 	
-	public DynamicCardRefined pop()
+	public Card pop()
 	{
-		DynamicCardRefined cardRemoved = columnCards.pop();
+		Card cardRemoved = columnCards.pop();
 		System.out.println("Removing: " + cardRemoved + " from column: " + number);
 		this.remove(cardRemoved);
 		this.validate();
@@ -47,7 +47,7 @@ public class GameColumn extends JLayeredPane
 		return cardRemoved;
 	}
 	
-	public DynamicCardRefined peek()
+	public Card peek()
 	{
 		return columnCards.peek();
 	}
@@ -60,7 +60,7 @@ public class GameColumn extends JLayeredPane
 		temp.drawRect(0,0,80,720);
 	}
 	
-	public Stack<DynamicCardRefined> getColumnCards()
+	public Stack<Card> getColumnCards()
 	{
 		return columnCards;
 	}
@@ -75,12 +75,12 @@ public class GameColumn extends JLayeredPane
 		return number;
 	}
 	
-	public int indexOf(DynamicCardRefined aCard)
+	public int indexOf(Card aCard)
 	{
 		return columnCards.indexOf(aCard);
 	}
 	
-	public DynamicCardRefined get(int index)
+	public Card get(int index)
 	{
 		return columnCards.get(index);
 	}

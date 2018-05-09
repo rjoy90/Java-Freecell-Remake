@@ -7,28 +7,28 @@ import com.freecell.views.GameColumn;
 
 public class FreeCellGame 
 {
-	private DynamicCardRefined[] set;
-	private Stack<DynamicCardRefined> remaining;
+	private Card[] set;
+	private Stack<Card> remaining;
 	
-	private Stack<DynamicCardRefined> cardsBeingMoved;
+	private Stack<Card> cardsBeingMoved;
 	private GameColumn cardsOriginalColumn;
 	private FreeSpace cardOriginalFreeSpace;
 	
-	public DynamicCardRefined[] getSet() 
+	public Card[] getSet() 
 	{
 		return set;
 	}
 
-	public void setSet(DynamicCardRefined[] set) 
+	public void setSet(Card[] set) 
 	{
 		this.set = set;
 	}
 	
 	public FreeCellGame()
 	{
-		cardsBeingMoved = new Stack<DynamicCardRefined>();
-		set = new DynamicCardRefined [52];
-		remaining = new Stack<DynamicCardRefined>();
+		cardsBeingMoved = new Stack<Card>();
+		set = new Card [52];
+		remaining = new Stack<Card>();
 	}
 	
 	public void fillArray()
@@ -58,7 +58,7 @@ public class FreeCellGame
 	{   
 		Random gen = new Random();
 		int y=0;
-		DynamicCardRefined temp;
+		Card temp;
 		for (int x = 0; x < set.length; x++ )
 		{
 			y=gen.nextInt(52);
@@ -73,17 +73,17 @@ public class FreeCellGame
 		}
 	}
 	
-	public Stack<DynamicCardRefined> getRemaining()
+	public Stack<Card> getRemaining()
 	{
 		return remaining;
 	}
 
-	public Stack<DynamicCardRefined> getCardsBeingMoved() 
+	public Stack<Card> getCardsBeingMoved() 
 	{
 		return cardsBeingMoved;
 	}
 
-	public void setCardsBeingMoved(Stack<DynamicCardRefined> cardsBeingMoved) 
+	public void setCardsBeingMoved(Stack<Card> cardsBeingMoved) 
 	{
 		this.cardsBeingMoved = cardsBeingMoved;
 	}

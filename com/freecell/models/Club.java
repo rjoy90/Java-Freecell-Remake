@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Club extends DynamicCardRefined
+public class Club extends Card
 {
-	//clubs locations here
-	private int club_ULcrnL_bX, club_LRcrnL_bX; //where the left and right most circles of upperLeft, lower right corners will start
-	private int club_ULcrnC_bX; //center circle location of upper left corner 
+	/*
+	 * variables are explained in constructor
+	 */
+	private int club_ULcrnL_bX, club_LRcrnL_bX;
+	private int club_ULcrnC_bX; 
 	private int club_ULcrn_triC_bX;
 	private int club_LRcrnC_bX;
 	private int club_LRcrn_triC_bX;
@@ -59,26 +61,27 @@ public class Club extends DynamicCardRefined
 	public Club(int suit, int face, int size)
 	{
 		super(suit,face, size);
-		//clubs section
-		//Xs: leftMost circle
-		club_crnCircRad = (int) (cSize/2.0);	//10
+		/*
+		 * all x locations, widths, or radii for individual circles and triangles that make up clubs
+		 */
+		club_crnCircRad = (int) (cSize/2.0);//10
 		club_circRad = (int) (size/2.0); //20
-		club_ULcrnL_bX = 2;
+		club_ULcrnL_bX = 2;//small club in upper-left corner, leftmost circle x
 		club_crnCircDistX = (int) Math.round(2.0*club_crnCircRad/3.0);	//7, distance from start of one circle to the next
 		club_circDistX = (int) Math.round(2.0/3.0 * club_circRad);// 13 when rounded
-		club_ULcrnC_bX = club_ULcrnL_bX + club_crnCircDistX; //where the center (top/bottom) circle of club starts
+		club_ULcrnC_bX = club_ULcrnL_bX + club_crnCircDistX; //upper-left corner, center circle of club
 		club_LRcrnC_bX = (int) (width - club_crnCircRad - club_ULcrnL_bX - club_crnCircDistX); //181, lower right corner center circle x
-		club_LRcrnL_bX = club_LRcrnC_bX - club_crnCircDistX;//lower right corner
+		club_LRcrnL_bX = club_LRcrnC_bX - club_crnCircDistX;//lower right corner, leftmost circle
 				
 		club_ULcrn_triC_bX =  (int) ((club_ULcrnC_bX + club_ULcrnC_bX + club_crnCircRad)/2.0); //center of upper left triangle x
 		club_LRcrn_triC_bX = (int) ((club_LRcrnC_bX + club_LRcrnC_bX + club_crnCircRad)/2.0);//center of lower right triangle x
 		
-		club_crn_triDistX = (int) (2.0/5.0 * cSize); //8
+		club_crn_triDistX = (int) (2.0/5.0 * cSize); //how wide the base of the triangle is for corner clubs
 		
-		club_leftL_bX = (int) (club_ULcrnC_bX + club_crnCircDistX + club_crnCircRad + cSize/4.0); //31, leftMost circle of left column clubs
-		club_leftC_bX = club_leftL_bX + club_circDistX; //center circle
-		club_centerL_bX = (int) (width/2.0 - club_circRad/2 - club_circDistX);//77, this is left circle center clubs x
-		club_centerC_bX = club_centerL_bX + club_circDistX; //90, center club center circle x
+		club_leftL_bX = (int) (club_ULcrnC_bX + club_crnCircDistX + club_crnCircRad + cSize/4.0); //31, leftMost circle for any left column clubs
+		club_leftC_bX = club_leftL_bX + club_circDistX; //center circle of any left column club
+		club_centerL_bX = (int) (width/2.0 - club_circRad/2 - club_circDistX);//77, leftmost circle of any center club x
+		club_centerC_bX = club_centerL_bX + club_circDistX; //90, center circle of any center club
 		
 		club_rightC_bX = (int) (club_LRcrnL_bX - cSize/4.0 - club_circRad - club_circDistX);//140, center circle x
 		club_rightL_bX = club_rightC_bX - club_circDistX; //127, where left most circle in right column starts x

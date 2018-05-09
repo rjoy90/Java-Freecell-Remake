@@ -3,11 +3,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-import com.freecell.models.DynamicCardRefined;
+import com.freecell.models.Card;
 
 public class FreeSpace extends JPanel
 {
-	private DynamicCardRefined cardPlacedInFreeSpace;
+	private Card cardPlacedInFreeSpace;
 	public FreeSpace()
 	{
 		cardPlacedInFreeSpace = null;
@@ -22,12 +22,12 @@ public class FreeSpace extends JPanel
 		super.paintComponent(g);
 	}
 
-	public DynamicCardRefined getCardPlacedInFreeSpace() 
+	public Card getCardPlacedInFreeSpace() 
 	{
 		return cardPlacedInFreeSpace;
 	}
 
-	public void setCardPlacedInFreeSpace(DynamicCardRefined cardPlacedInFreeSpace) 
+	public void setCardPlacedInFreeSpace(Card cardPlacedInFreeSpace) 
 	{
 		this.cardPlacedInFreeSpace = cardPlacedInFreeSpace;
 	}

@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Stack;
 
-import com.freecell.models.DynamicCardRefined;
+import com.freecell.models.Card;
 import com.freecell.models.FreeCellGame;
 import com.freecell.presenters.FreeCellPresenter;
 import com.freecell.views.FreeSpace;
@@ -21,7 +21,7 @@ public class Helper
 		this.presenter = presenter;
 	}
 	
-	public boolean validateSequence(List<DynamicCardRefined> subList)
+	public boolean validateSequence(List<Card> subList)
 	{
 		for(int x = 0; x < subList.size()-1; x++)
 		{
@@ -35,12 +35,12 @@ public class Helper
 		return true;
 	}
 	
-	public boolean checkNumMoves(List<DynamicCardRefined> list, GameColumn start, GameColumn destination)
+	public boolean checkNumMoves(List<Card> list, GameColumn start, GameColumn destination)
 	{
 		int size = list.size();
 		System.out.println("You are attempting to move " + size + " cards.");
 		
-		Stack<DynamicCardRefined> destStack = destination.getColumnCards();
+		Stack<Card> destStack = destination.getColumnCards();
 		if(!destStack.isEmpty() && (destStack.peek().getColor().equals(list.get(0).getColor()) ||
 		destStack.peek().getFace() - list.get(0).getFace() != 1))
 		{
@@ -74,7 +74,7 @@ public class Helper
 	public void returnToOriginalColumn()
 	{
 		FreeCellGame game = presenter.getModel();
-		Stack<DynamicCardRefined> cardsBeingMoved = game.getCardsBeingMoved();
+		Stack<Card> cardsBeingMoved = game.getCardsBeingMoved();
 		GameColumn cardsOriginalColumn = game.getCardsOriginalColumn();
 		int size = cardsBeingMoved.size();
 		for(int x = 0; x < size; x++)
@@ -85,21 +85,21 @@ public class Helper
 		clearSequenceStack(cardsBeingMoved);
 	}
 	
-	public void clearSequenceStack(Stack<DynamicCardRefined> cardsBeingMoved)
+	public void clearSequenceStack(Stack<Card> cardsBeingMoved)
 	{
 		int size = cardsBeingMoved.size();
 		System.out.println("Sequence stack size: " + size);
 		System.out.println("Clearing sequence stack: ");
 		for(int x = 0; x < size; x++)
 		{
-			DynamicCardRefined temp = cardsBeingMoved.pop();
+			Card temp = cardsBeingMoved.pop();
 			System.out.println("Removed: " + temp + " from sequence stack");
 		}
 		
 		System.out.println("Sequence stack size after: " + cardsBeingMoved.size());
 	}
 	
-	public void movingCards(Stack<DynamicCardRefined> cardsBeingMoved, GameColumn cardsOriginalColumn, int cardIndex, int size)
+	public void movingCards(Stack<Card> cardsBeingMoved, GameColumn cardsOriginalColumn, int cardIndex, int size)
 	{
 		System.out.println("Num cards to move: " + (size - cardIndex));
 		for(int x = cardIndex; x < size; x++)
@@ -113,7 +113,7 @@ public class Helper
 		}
 	}
 	
-	public void newColumn(Stack<DynamicCardRefined> cardsBeingMoved, GameColumn column)
+	public void newColumn(Stack<Card> cardsBeingMoved, GameColumn column)
 	{
 		for(int x = 0; x < cardsBeingMoved.size(); x++)
 		{
@@ -125,7 +125,7 @@ public class Helper
 		presenter.refreshView();
 	}
 	
-	public void drawMovingCards(Stack<DynamicCardRefined> cardsBeingMoved, Point primaryPoint, int size)
+	public void drawMovingCards(Stack<Card> cardsBeingMoved, Point primaryPoint, int size)
 	{
 		for(int x = 0; x < size; x++)
 		{
@@ -142,7 +142,7 @@ public class Helper
 		presenter.refreshView();
 	}
 	
-	public void returnToFreeSpace(FreeSpace cardOriginalFreeSpace, Stack<DynamicCardRefined> cardsBeingMoved)
+	public void returnToFreeSpace(FreeSpace cardOriginalFreeSpace, Stack<Card> cardsBeingMoved)
 	{
 		cardOriginalFreeSpace.remove(0);
 		cardOriginalFreeSpace.setCardPlacedInFreeSpace(cardsBeingMoved.peek());
@@ -161,7 +161,7 @@ public class Helper
 		else
 		{
 			FreeSpace fs = game.getCardOriginalFreeSpace();
-			Stack<DynamicCardRefined> cardsBeingMoved = game.getCardsBeingMoved();
+			Stack<Card> cardsBeingMoved = game.getCardsBeingMoved();
 			returnToFreeSpace(fs, cardsBeingMoved);
 		}
 	}

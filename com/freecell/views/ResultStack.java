@@ -4,22 +4,22 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Stack;
 import javax.swing.JPanel;
-import com.freecell.models.DynamicCardRefined;
+import com.freecell.models.Card;
 
 public class ResultStack extends JPanel
 {
-	private Stack<DynamicCardRefined> results;
+	private Stack<Card> results;
 	private String suit;
 	
 	public ResultStack()
 	{
 		setMaximumSize(new Dimension(100,150));
-		results = new Stack<DynamicCardRefined>();
+		results = new Stack<Card>();
 		this.add(new DeckBackPanel());
 		
 	}
 	
-	public boolean push(DynamicCardRefined thisCard)
+	public boolean push(Card thisCard)
 	{
 		System.out.println(thisCard + " --> " + thisCard.getFace());
 		if(results.size() == 0)
@@ -47,7 +47,7 @@ public class ResultStack extends JPanel
 		}
 	}
 	
-	public void addCard(DynamicCardRefined thisCard)
+	public void addCard(Card thisCard)
 	{
 		results.push(thisCard);
 		this.removeAll();

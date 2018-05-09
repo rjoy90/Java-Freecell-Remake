@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Spade extends DynamicCardRefined
+public class Spade extends Card
 {
 	//--------------------------------------------------------
 	//--------------Spades here-------------------------------
